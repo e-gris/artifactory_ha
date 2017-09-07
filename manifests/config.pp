@@ -46,10 +46,10 @@ class artifactory_ha::config {
     content => "security.token=${::artifactory_ha::security_token}",
   }
 
-  file { "${::artifactory_ha::cluster_home}/ha-etc/storage.properties":
+  file { "${::artifactory_ha::cluster_home}/ha-etc/db.properties":
     ensure  => file,
     content => epp(
-      'artifactory_ha/storage.properties.epp',
+      'artifactory_ha/db.properties.epp',
       {
         db_url                         => $::artifactory_ha::db_url,
         db_username                    => $::artifactory_ha::db_username,
@@ -63,7 +63,7 @@ class artifactory_ha::config {
         binary_provider_cache_dir      => $::artifactory_ha::binary_provider_cache_dir,
       }
     ),
-    mode    => '0664',
+    mode    => '0600',
   }
 
   file { "${::artifactory_ha::cluster_home}/ha-data":
