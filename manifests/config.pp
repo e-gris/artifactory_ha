@@ -31,22 +31,22 @@ class artifactory_ha::config {
     ensure => directory,
   }
 
-  file { "${::artifactory_ha::cluster_home}/ha-etc":
+  file { "${::artifactory_ha::cluster_home}/etc":
     ensure => directory,
   }
 
   # Create the plugins directory
-  file { "${::artifactory_ha::cluster_home}/ha-etc/plugins":
+  file { "${::artifactory_ha::cluster_home}/etc/plugins":
     ensure  => directory,
   }
 
   # Setup cluster.properties
-  file { "${::artifactory_ha::cluster_home}/ha-etc/cluster.properties":
-    ensure  => file,
-    content => "security.token=${::artifactory_ha::security_token}",
-  }
+  #file { "${::artifactory_ha::cluster_home}/etc/cluster.properties":
+  #  ensure  => file,
+  #  content => "security.token=${::artifactory_ha::security_token}",
+  #}
 
-  file { "${::artifactory_ha::cluster_home}/ha-etc/db.properties":
+  file { "${::artifactory_ha::cluster_home}/etc/db.properties":
     ensure  => file,
     content => epp(
       'artifactory_ha/db.properties.epp',
