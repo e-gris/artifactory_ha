@@ -1,15 +1,15 @@
 {
-  "name": "autostructure-artifactory_ha",
+  "name": "exgrizz-artifactory_ha",
   "version": "2.0.5",
-  "author": "Bryan Belanger",
-  "summary": "Installs Artifactory high availability",
+  "author": "Bryan Belanger, patches by Eric Griswold",
+  "summary": "Forked from autostructure/artifactory_ha. Installs Artifactory HA",
   "license": "Apache-2.0",
-  "source": "https://github.com/autostructure/artifactory_ha.git",
-  "project_page": "https://github.com/autostructure/artifactory_ha",
-  "issues_url": "https://github.com/autostructure/artifactory_ha/issues",
+  "source": "https://github.com/e-gris/artifactory_ha.git",
+  "project_page": "https://github.com/e-gris/artifactory_ha",
+  "issues_url": "https://github.com/e-gris/artifactory_ha/issues",
   "dependencies": [
     {
-      "name": "autostructure-artifactory_pro",
+      "name": "exgrizz-artifactory_pro",
       "version_requirement": ">= 2.0.0"
     }
   ],
