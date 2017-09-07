@@ -1,6 +1,6 @@
 {
   "name": "exgrizz-artifactory_ha",
-  "version": "99.0.6",
+  "version": "99.0.7",
   "author": "Bryan Belanger, patches by Eric Griswold",
   "summary": "Forked from autostructure/artifactory_ha. Installs Artifactory HA",
   "license": "Apache-2.0",
