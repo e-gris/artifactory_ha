@@ -49,7 +49,7 @@ class artifactory_ha::config {
   file { "${::artifactory_ha::cluster_home}/ha-etc/storage.properties":
     ensure  => file,
     content => epp(
-      'artifactory/storage.properties.epp',
+      'artifactory/EXG-storage.properties.epp',
       {
         db_url                         => $::artifactory_ha::db_url,
         db_username                    => $::artifactory_ha::db_username,
