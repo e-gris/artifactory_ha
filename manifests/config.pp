@@ -22,8 +22,8 @@ class artifactory_ha::config {
     mode    => '0644',
   }
 
-  file { "${::artifactory::artifactory_home}/etc/storage.properties":
-    ensure => absent,
+  file { "${::artifactory::artifactory_home}/etc}":
+    ensure => directory,
   }
 
   # Configure cluster home
