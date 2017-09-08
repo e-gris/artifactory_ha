@@ -5,8 +5,8 @@ define artifactory_ha::plugin(
   )
 {
   File {
-    owner => 'jfrog',
-    group => 'jfrog',
+    owner => 'artifactory',
+    group => 'artifactory',
     mode  => 'a+rx',
   }
 
