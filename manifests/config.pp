@@ -5,8 +5,8 @@
 class artifactory_ha::config {
   # Default file sould have artifactory owner and group
   File {
-    owner => 'artifactory',
-    group => 'artifactory',
+    owner => 'jfrog',
+    group => 'jfrog',
   }
 
   file { "${::artifactory::artifactory_home}/etc/ha-node.properties":
