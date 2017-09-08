@@ -22,6 +22,10 @@ class artifactory_ha::config {
     mode    => '0644',
   }
 
+  file { "${::artifactory::artifactory_home}" }:
+    ensure => directory,
+  }
+  
   file { "${::artifactory::artifactory_home}/etc}":
     ensure => directory,
   }
