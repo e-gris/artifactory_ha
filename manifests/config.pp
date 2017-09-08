@@ -22,14 +22,6 @@ class artifactory_ha::config {
     mode    => '0644',
   }
 
-  file { "${::artifactory::artifactory_home}":
-    ensure => directory,
-  }
-  
-  file { "${::artifactory::artifactory_home}/etc}":
-    ensure => directory,
-  }
-
   # Configure cluster home
   file { $::artifactory_ha::cluster_home:
     ensure => directory,
