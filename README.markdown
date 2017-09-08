@@ -59,8 +59,8 @@ class { '::artifactory_ha':
   pool_max_active                => 100,
   pool_max_idle                  => 10,
   binary_provider_cache_maxSize  => $binary_provider_cache_maxSize,
-  binary_provider_filesystem_dir => '/var/opt/jfrog/artifactory/data/filestore',
-  binary_provider_cache_dir      => '/var/opt/jfrog/artifactory/',
+  binary_provider_filesystem_dir => '/opt/jfrog/artifactory/data/filestore',
+  binary_provider_cache_dir      => '/opt/jfrog/artifactory/',
 }
 ~~~
 
