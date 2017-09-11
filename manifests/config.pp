@@ -69,13 +69,17 @@ class artifactory_ha::config {
   file { "${::artifactory_ha::cluster_home}/ha-backup":
     ensure => directory,
   }
-
+  
+  file { "${::artifactory::artifactory_home}/tomcat/lib":
+    ensure => directory,
+  }
+  
   $file_name =  regsubst($::artifactory_ha::jdbc_driver_url, '.+\/([^\/]+)$', '\1')
 
   ::wget::fetch { $::artifactory_ha::jdbc_driver_url:
     destination => "${::artifactory::artifactory_home}/tomcat/lib/",
   } ->
   file { "${::artifactory::artifactory_home}/tomcat/lib/${file_name}":
-    mode => '0755',
+    mode => '0644',
   }
 }
