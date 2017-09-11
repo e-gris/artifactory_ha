@@ -70,7 +70,8 @@ class artifactory_ha::config {
     ensure => directory,
   }
   
-  file { "${::artifactory::artifactory_home}/tomcat/lib":
+  file { [ "${::artifactory::artifactory_home}/tomcat",
+           "${::artifactory::artifactory_home}/tomcat/lib" ]:
     ensure => directory,
   }
   
