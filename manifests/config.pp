@@ -22,30 +22,34 @@ class artifactory_ha::config {
     mode    => '0644',
   }
 
+  file { "${::artifactory::artifactory_home}/etc/storage.properties":
+    ensure => absent,
+  }
+
   # Configure cluster home
   file { $::artifactory_ha::cluster_home:
     ensure => directory,
   }
 
-  file { "${::artifactory_ha::cluster_home}/etc":
+  file { "${::artifactory_ha::cluster_home}/ha-etc":
     ensure => directory,
   }
 
   # Create the plugins directory
-  file { "${::artifactory_ha::cluster_home}/etc/plugins":
+  file { "${::artifactory_ha::cluster_home}/ha-etc/plugins":
     ensure  => directory,
   }
 
   # Setup cluster.properties
-  #file { "${::artifactory_ha::cluster_home}/etc/cluster.properties":
-  #  ensure  => file,
-  #  content => "security.token=${::artifactory_ha::security_token}",
-  #}
+  file { "${::artifactory_ha::cluster_home}/ha-etc/cluster.properties":
+    ensure  => file,
+    content => "security.token=${::artifactory_ha::security_token}",
+  }
 
-  file { "${::artifactory_ha::cluster_home}/etc/db.properties":
+  file { "${::artifactory_ha::cluster_home}/ha-etc/storage.properties":
     ensure  => file,
     content => epp(
-      'artifactory_ha/db.properties.epp',
+      'artifactory/storage.properties.epp',
       {
         db_url                         => $::artifactory_ha::db_url,
         db_username                    => $::artifactory_ha::db_username,
@@ -59,7 +63,7 @@ class artifactory_ha::config {
         binary_provider_cache_dir      => $::artifactory_ha::binary_provider_cache_dir,
       }
     ),
-    mode    => '0600',
+    mode    => '0664',
   }
 
   file { "${::artifactory_ha::cluster_home}/ha-data":
@@ -69,12 +73,7 @@ class artifactory_ha::config {
   file { "${::artifactory_ha::cluster_home}/ha-backup":
     ensure => directory,
   }
-  
-  file { [ "${::artifactory::artifactory_home}/tomcat",
-           "${::artifactory::artifactory_home}/tomcat/lib" ]:
-    ensure => directory,
-  }
-  
+
   $file_name =  regsubst($::artifactory_ha::jdbc_driver_url, '.+\/([^\/]+)$', '\1')
 
   ::wget::fetch { $::artifactory_ha::jdbc_driver_url:
