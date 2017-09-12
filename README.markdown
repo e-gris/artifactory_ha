@@ -42,7 +42,7 @@ Requires a JDK to be installed.
 
 ### Beginning with artifactory
 
-Artifactory ha requires a license key, cluster configurations and nfs location information.
+Artifactory ha requires a license key and nfs location information.
 
 ~~~
 class { '::artifactory_ha':
@@ -54,7 +54,6 @@ class { '::artifactory_ha':
   db_password                    => 'efw23gn2j3',
   security_token                => 'ABC1MY0Token1',
   is_primary                    => true,
-  cluster_home                  => '/nfs/mount/location',
   binary_provider_type           => 'filesystem',
   pool_max_active                => 100,
   pool_max_idle                  => 10,

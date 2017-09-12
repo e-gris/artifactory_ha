@@ -34,13 +34,16 @@ class artifactory_ha(
   Hash $plugin_urls = {},
 ) {
 
-  $storage_properties_location = "${cluster_home}/ha-etc/plugins"
-
   class {'::artifactory_pro':
-    license_key  => $license_key,
-    yum_name     => $yum_name,
-    yum_baseurl  => $yum_baseurl,
-    package_name => $package_name,
+    license_key     => $license_key,
+    yum_name        => $yum_name,
+    yum_baseurl     => $yum_baseurl,
+    package_name    => $package_name,
+    jdbc_driver_url => $jdbc_driver_url,
+    db_type         => $db_type,
+    db_url          => $db_url,
+    db_username     => $db_username,
+    db_password     => $db_password,
   } ->
   class{'::artifactory_ha::config': } ->
   class{'::artifactory_ha::post_config': }
