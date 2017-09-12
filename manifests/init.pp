@@ -40,7 +40,6 @@ class artifactory_ha(
     yum_baseurl     => $yum_baseurl,
     package_name    => $package_name,
     jdbc_driver_url => $jdbc_driver_url,
-    jdbc_driver_url => $jdbc_driver_url,
     db_type         => $db_type,
     db_url          => $db_url,
     db_username     => $db_username,
