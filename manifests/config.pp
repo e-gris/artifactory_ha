@@ -3,7 +3,7 @@
 # This class is called from artifactory for service config.
 #
 class artifactory_ha::config {
-  # Default file sould have artifactory owner and group
+  # Default file should have artifactory owner and group
   File {
     owner => 'artifactory',
     group => 'artifactory',
@@ -14,9 +14,10 @@ class artifactory_ha::config {
     content => epp(
       'artifactory_ha/ha-node.properties.epp',
       {
-        cluster_home    => $::artifactory_ha::cluster_home,
-        membership_port => $::artifactory_ha::membership_port,
-        is_primary      => $::artifactory_ha::is_primary,
+        artifactory_ha_data_dir   => $::artifactory_ha::artifactory_ha_data_dir,
+        artifactory_ha_backup_dir => $::artifactory_ha::artifactory_ha_backup_dir,
+        membership_port           => $::artifactory_ha::membership_port,
+        is_primary                => $::artifactory_ha::is_primary,
       }
     ),
     mode    => '0644',
@@ -26,25 +27,30 @@ class artifactory_ha::config {
     ensure => absent,
   }
 
-  # Configure cluster home
-  file { $::artifactory_ha::cluster_home:
-    ensure => directory,
-  }
 
-  file { "${::artifactory_ha::cluster_home}/ha-etc":
-    ensure => directory,
-  }
+  ###
+  ### Much of the cluster home stuff no longer applies
+  ###
+  
+  # # Configure cluster home
+  # file { $::artifactory_ha::cluster_home:
+  #   ensure => directory,
+  # }
 
-  # Create the plugins directory
-  file { "${::artifactory_ha::cluster_home}/ha-etc/plugins":
-    ensure  => directory,
-  }
+  # file { "${::artifactory_ha::cluster_home}/ha-etc":
+  #   ensure => directory,
+  # }
 
-  # Setup cluster.properties
-  file { "${::artifactory_ha::cluster_home}/ha-etc/cluster.properties":
-    ensure  => file,
-    content => "security.token=${::artifactory_ha::security_token}",
-  }
+  # # Create the plugins directory
+  # file { "${::artifactory_ha::cluster_home}/ha-etc/plugins":
+  #   ensure  => directory,
+  # }
+
+  # # Setup cluster.properties
+  # file { "${::artifactory_ha::cluster_home}/ha-etc/cluster.properties":
+  #   ensure  => file,
+  #   content => "security.token=${::artifactory_ha::security_token}",
+  # }
 
   ## storage.properties is deprecated.
   ##
