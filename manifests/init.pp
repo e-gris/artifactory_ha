@@ -25,6 +25,7 @@ class artifactory_ha(
   String $yum_name = 'bintray-jfrog-artifactory-pro-rpms',
   String $yum_baseurl = 'http://jfrog.bintray.com/artifactory-pro-rpms',
   String $package_name = 'jfrog-artifactory-pro',
+  Optional[String] $package_version = undef,
   Hash $plugin_urls = {},
 ) {
 
@@ -33,6 +34,7 @@ class artifactory_ha(
     yum_name        => $yum_name,
     yum_baseurl     => $yum_baseurl,
     package_name    => $package_name,
+    package_version => $package_version,
     jdbc_driver_url => $jdbc_driver_url,
     db_type         => $db_type,
     db_url          => $db_url,
