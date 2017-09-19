@@ -25,12 +25,6 @@ class artifactory_ha(
   String $yum_name = 'bintray-jfrog-artifactory-pro-rpms',
   String $yum_baseurl = 'http://jfrog.bintray.com/artifactory-pro-rpms',
   String $package_name = 'jfrog-artifactory-pro',
-  Optional[Enum['filesystem', 'fullDb','cachedFS']] $binary_provider_type = undef,
-  Optional[Integer] $pool_max_active = undef,
-  Optional[Integer] $pool_max_idle = undef,
-  Optional[Integer] $binary_provider_cache_maxSize = undef,
-  Optional[String] $binary_provider_filesystem_dir = undef,
-  Optional[String] $binary_provider_cache_dir = undef,
   Hash $plugin_urls = {},
 ) {
 
