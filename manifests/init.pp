@@ -44,6 +44,7 @@ class artifactory_ha(
     db_url          => $db_url,
     db_username     => $db_username,
     db_password     => $db_password,
+    is_primary      => $is_primary,
   } ->
   class{'::artifactory_ha::config': } ->
   class{'::artifactory_ha::post_config': }
