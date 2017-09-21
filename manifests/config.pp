@@ -5,8 +5,8 @@
 class artifactory_ha::config {
   # Default file should have artifactory owner and group
   File {
-    owner => 'artifactory',
-    group => 'artifactory',
+    owner => $::artifactory::artifactory_user,
+    group => $::artifactory::artifactory_group,
   }
 
   file { "${::artifactory::artifactory_home}/etc/ha-node.properties":
@@ -23,6 +23,16 @@ class artifactory_ha::config {
     mode    => '0644',
   }
 
+  $jdbc_file_name = regsubst($::artifactory_ha::jdbc_driver_url,
+      '.+\/([^\/]+)$', '\1')
+
+  wget::fetch { $::artifactory_ha::jdbc_driver_url:
+    destination => "${::artifactory::artifactory_home}/tomcat/lib/",
+    } ->
+    file { "${::artifactory::artifactory_home}/tomcat/lib/${jdbc_file_name}":
+      mode => '0644',
+    }
+
   file { "${::artifactory_ha::cluster_home}/ha-data":
     ensure => directory,
   }
@@ -31,12 +41,7 @@ class artifactory_ha::config {
     ensure => directory,
   }
 
-  $file_name =  regsubst($::artifactory_ha::jdbc_driver_url, '.+\/([^\/]+)$', '\1')
-
-  ::wget::fetch { $::artifactory_ha::jdbc_driver_url:
-    destination => "${::artifactory::artifactory_home}/tomcat/lib/",
-  } ->
-  file { "${::artifactory::artifactory_home}/tomcat/lib/${file_name}":
-    mode => '0644',
+  if (! $::artifactory_ha::is_primary) {
+    ## add tarball
   }
-}
+}  

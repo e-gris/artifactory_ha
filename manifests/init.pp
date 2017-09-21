@@ -1,16 +1,3 @@
-# Class: artifactory
-# ===========================
-#
-# Full description of class artifactory here.
-#
-# Parameters
-# ----------
-#
-# * `sample parameter`
-#   Explanation of what this parameter affects and what it defaults to.
-#   e.g. "Specify one or more upstream ntp servers as an array."
-#
-
 class artifactory_ha(
   String $jdbc_driver_url,
   Enum['mssql', 'mysql', 'oracle', 'postgresql'] $db_type,
@@ -26,30 +13,33 @@ class artifactory_ha(
   String $yum_baseurl = 'http://jfrog.bintray.com/artifactory-pro-rpms',
   String $package_name = 'jfrog-artifactory-pro',
   Optional[String] $package_version = undef,
-  Hash $plugin_urls = {},
+  Optional[String] $artifactory_home = "/var/opt/jfrog/artifactory",
+  Optional[String] $artifactory_etc = "/etc/opt/jfrog/artifactory",
+  Optional[String] $artifactory_user = "artifactory",
+  Optional[String] $artifactory_group = "artifactory",
 ) {
 
   class {'::artifactory_pro':
-    license_key     => $license_key,
-    yum_name        => $yum_name,
-    yum_baseurl     => $yum_baseurl,
-    package_name    => $package_name,
-    package_version => $package_version,
-    jdbc_driver_url => $jdbc_driver_url,
-    db_type         => $db_type,
-    db_url          => $db_url,
-    db_username     => $db_username,
-    db_password     => $db_password,
-    is_primary      => $is_primary,
+    artifactory_etc   => $artifactory_etc,
+    artifactory_group => $artifactory_group,
+    artifactory_home  => $artifactory_home,
+    artifactory_user  => $artifactory_user,
+    db_password       => $db_password,
+    db_type           => $db_type,
+    db_url            => $db_url,
+    db_username       => $db_username,
+    is_primary        => $is_primary,
+    jdbc_driver_url   => $jdbc_driver_url,
+    license_key       => $license_key,
+    package_name      => $package_name,
+    package_version   => $package_version,
+    yum_baseurl       => $yum_baseurl,
+    yum_name          => $yum_name,
   } ->
-  class{'::artifactory_ha::config': } ->
-  class{'::artifactory_ha::post_config': }
+  class{'::artifactory_ha::config': }
 
   # Ensure Artifactory Pro is configured before Artifactory HA.
   Class['::artifactory_pro::config'] ->
   Class['::artifactory_ha::config']  ~>
-  Class['::artifactory::service']
-
-  Class['::artifactory_ha::post_config'] ~>
   Class['::artifactory::service']
 }
