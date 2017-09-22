@@ -16,6 +16,7 @@ class artifactory_ha(
   Optional[String] $artifactory_group = "artifactory",
   Optional[String] $artifactory_home = "/var/opt/jfrog/artifactory",
   Optional[String] $artifactory_user = "artifactory",
+  Optional[String] $bootstrap_bundle = undef,
   Optional[String] $package_version = undef,
 ) {
 
