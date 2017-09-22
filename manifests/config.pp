@@ -41,7 +41,7 @@ class artifactory_ha::config {
     ensure => directory,
   }
 
-  if (! $::artifactory_ha::is_primary) {
-    ## add tarball
-  }
+  #if (! $::artifactory_ha::is_primary) {
+  #  ## add tarball
+  #}
 }  

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'artifactory_ha' do
   let(:params) {
     {
-      license_key: 'my_license_key',
+      license_file: 'my_license_file',
       jdbc_driver_url: 'http://autostructure.com/my_url',
       db_type: 'mysql',
       db_url: 'jdbc:oracle:sad',
