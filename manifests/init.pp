@@ -12,11 +12,11 @@ class artifactory_ha(
   String $yum_name = 'bintray-jfrog-artifactory-pro-rpms',
   String $yum_baseurl = 'http://jfrog.bintray.com/artifactory-pro-rpms',
   String $package_name = 'jfrog-artifactory-pro',
-  Optional[String] $package_version = undef,
-  Optional[String] $artifactory_home = "/var/opt/jfrog/artifactory",
   Optional[String] $artifactory_etc = "/etc/opt/jfrog/artifactory",
-  Optional[String] $artifactory_user = "artifactory",
   Optional[String] $artifactory_group = "artifactory",
+  Optional[String] $artifactory_home = "/var/opt/jfrog/artifactory",
+  Optional[String] $artifactory_user = "artifactory",
+  Optional[String] $package_version = undef,
 ) {
 
   class {'::artifactory_pro':
