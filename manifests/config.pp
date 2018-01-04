@@ -41,9 +41,9 @@ class artifactory_ha::config {
     ensure => directory,
   }
 
-  if (! $::artifactory_ha::is_primary) {
-    file { "${::artifactory::artifactory_etc}/bootstrap.bundle.tar.gz":
-      source => $::artifactory_ha::bootstrap_bundle,
-    }
-  }
+#  if (! $::artifactory_ha::is_primary) {
+#    file { "${::artifactory::artifactory_etc}/bootstrap.bundle.tar.gz":
+#      source => $::artifactory_ha::bootstrap_bundle,
+#    }
+#  }
 }  
