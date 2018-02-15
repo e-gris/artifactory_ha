@@ -11,6 +11,12 @@
     {
       "name": "exgrizz-artifactory_pro",
       "version_requirement": ">= 99.0.0"
+    },
+    {
+      "name": "puppetlabs-package"
+    },
+    {
+      "name": "puppetlabs-service"
     }
   ],
   "operatingsystem_support": [
